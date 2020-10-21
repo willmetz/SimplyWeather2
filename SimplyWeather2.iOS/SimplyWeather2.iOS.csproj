@@ -112,16 +112,22 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <BundleResource Include="Resources\tab_about.png" />
-    <BundleResource Include="Resources\tab_about%402x.png" />
-    <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_feed.png" />
-    <BundleResource Include="Resources\tab_feed%402x.png" />
-    <BundleResource Include="Resources\tab_feed%403x.png" />
     <BundleResource Include="Resources\xamarin_logo.png" />
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\home_icon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\radar_icon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\radar_icon.imageset\baseline_satellite_white_24pt_1x.png" />
+    <ImageAsset Include="Assets.xcassets\radar_icon.imageset\baseline_satellite_white_24pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\radar_icon.imageset\baseline_satellite_white_24pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\home_icon.imageset\baseline_home_white_24pt_1x.png" />
+    <ImageAsset Include="Assets.xcassets\home_icon.imageset\baseline_home_white_24pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\home_icon.imageset\baseline_home_white_24pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_1x.png" />
+    <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,5 +147,10 @@
       <Project>{5DA56299-F8B9-4356-9B8A-F5A2AE79D506}</Project>
       <Name>SimplyWeather2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\home_icon.imageset\" />
+    <Folder Include="Assets.xcassets\radar_icon.imageset\" />
+    <Folder Include="Assets.xcassets\forecast_icon.imageset\" />
   </ItemGroup>
 </Project>

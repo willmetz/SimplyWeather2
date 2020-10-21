@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimplyWeather2.Forecast.ForecastPage"
+             xmlns:vm="clr-namespace:SimplyWeather2.Forecast"
+             BackgroundColor="Pink">
+    <ContentPage.BindingContext>
+        <vm:ForecastViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Label Text="Forecast" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+    </ContentPage.Content>
+</ContentPage>

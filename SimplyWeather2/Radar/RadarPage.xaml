@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimplyWeather2.Radar.RadarPage"
+             xmlns:vm="clr-namespace:SimplyWeather2.Radar"
+             BackgroundColor="Green">
+    <ContentPage.BindingContext>
+        <vm:RadarViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Label Text="Radar" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SimplyWeather2.Views"
-    Title="SimplyWeather2" x:Class="SimplyWeather2.AppShell">
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:home="clr-namespace:SimplyWeather2.Home"
+       xmlns:radar="clr-namespace:SimplyWeather2.Radar"
+       xmlns:forecast="clr-namespace:SimplyWeather2.Forecast"
+    Title="SimplyWeather2"
+       x:Class="SimplyWeather2.AppShell">
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
     
@@ -20,17 +24,11 @@
                 <Setter Property="Shell.TabBarTitleColor" Value="White" />
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
-            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
     <TabBar>
-        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage"
-            ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Forecast" Icon="forecast_icon" ContentTemplate="{DataTemplate forecast:ForecastPage}" Route="Forecast"/>
+        <ShellContent Title="Home" Icon="home_icon" ContentTemplate="{DataTemplate home:HomePage}"  Route="Home"/>
+        <ShellContent Title="Radar" Icon="radar_icon" ContentTemplate="{DataTemplate radar:RadarPage}"  Route="Radar"/>
     </TabBar>
-    <!--
-        If you would like to navigate to this content you can do so by calling
-        await Shell.Current.GoToAsync("//LoginPage");
-    -->
-    <ShellContent Route="LoginPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginPage}" />
 </Shell>
