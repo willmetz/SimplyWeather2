@@ -4,9 +4,6 @@
              x:Class="SimplyWeather2.Radar.RadarPage"
              xmlns:vm="clr-namespace:SimplyWeather2.Radar"
              BackgroundColor="Green">
-    <ContentPage.BindingContext>
-        <vm:RadarViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Label Text="Radar" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
     </ContentPage.Content>

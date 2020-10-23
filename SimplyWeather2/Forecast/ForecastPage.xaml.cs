@@ -10,6 +10,7 @@ namespace SimplyWeather2.Forecast
         public ForecastPage()
         {
             InitializeComponent();
+            BindingContext = new ForecastViewModel();
         }
     }
 }

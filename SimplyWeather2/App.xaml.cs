@@ -1,19 +1,20 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using SimpleInjector;
 using SimplyWeather2.Services;
-using SimplyWeather2.Views;
+using Xamarin.Forms;
 
 namespace SimplyWeather2
 {
     public partial class App : Application
     {
+        private Container _container;
 
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            _container = new Container();
+            RegisterServices();
+
             MainPage = new AppShell();
         }
 
@@ -27,6 +28,11 @@ namespace SimplyWeather2
 
         protected override void OnResume()
         {
+        }
+
+        private void RegisterServices()
+        {
+            _container.Register<WeatherService, WeatherServiceImp>(Lifestyle.Singleton);
         }
     }
 }

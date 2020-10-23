@@ -4,9 +4,6 @@
              x:Class="SimplyWeather2.Home.HomePage"
              xmlns:vm="clr-namespace:SimplyWeather2.Home"
              BackgroundColor="Aqua">
-    <ContentPage.BindingContext>
-        <vm:HomeViewModel />
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Label Text="Home" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
     </ContentPage.Content>

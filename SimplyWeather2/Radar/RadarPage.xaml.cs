@@ -10,6 +10,8 @@ namespace SimplyWeather2.Radar
         public RadarPage()
         {
             InitializeComponent();
+
+            BindingContext = new RadarViewModel();
         }
     }
 }

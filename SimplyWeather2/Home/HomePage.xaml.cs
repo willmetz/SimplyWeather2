@@ -10,6 +10,8 @@ namespace SimplyWeather2.Home
         public HomePage()
         {
             InitializeComponent();
+
+            BindingContext = new HomeViewModel();
         }
     }
 }
