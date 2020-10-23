@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using SimplyWeather2.Forecast;
+﻿using SimplyWeather2.Forecast;
 using SimplyWeather2.Home;
 using SimplyWeather2.Radar;
-using SimplyWeather2.ViewModels;
-using SimplyWeather2.Views;
 using Xamarin.Forms;
 
 namespace SimplyWeather2
