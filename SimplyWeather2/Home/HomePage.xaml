@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Home.HomePage"
+             xmlns:cells="clr-namespace:SimplyWeather2.Home;assembly=SimplyWeather2"
              BackgroundColor="Aqua">
     <ContentPage.Content>
         <Grid>
@@ -12,7 +13,7 @@
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0" Margin="8">
-                <Label Text="Grand Rapids" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18"/>
+                <Label Text="{Binding LocationName}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18"/>
 
                 <Grid VerticalOptions="CenterAndExpand">
                     <Grid.ColumnDefinitions>
@@ -45,19 +46,14 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-            <CollectionView Grid.Row="1">
-                <CollectionView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                      <x:String>Baboon</x:String>
-                      <x:String>Capuchin Monkey</x:String>
-                      <x:String>Blue Monkey</x:String>
-                      <x:String>Squirrel Monkey</x:String>
-                      <x:String>Golden Lion Tamarin</x:String>
-                      <x:String>Howler Monkey</x:String>
-                      <x:String>Japanese Macaque</x:String>
-                    </x:Array>
-                </CollectionView.ItemsSource>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding HourlyForecastItems}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <cells:HourlyForecastCell/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
+
         </Grid>
         
     </ContentPage.Content>
