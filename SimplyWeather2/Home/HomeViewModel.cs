@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Threading.Tasks;
+using SimplyWeather2.Models;
+using SimplyWeather2.Services;
 using SimplyWeather2.ViewModels;
+using Xamarin.Essentials;
 
 namespace SimplyWeather2.Home
 {
@@ -11,33 +17,137 @@ namespace SimplyWeather2.Home
         public string LocationName
         {
             get => _locationName;
-            set {
+            set
+            {
                 _locationName = value;
                 RaiseAndSetIfChanged(nameof(LocationName));
             }
         }
 
-        private List<HourlyForecastItem> _hourlyForecastItems;
-        public List<HourlyForecastItem> HourlyForecastItems
+        private string _temperature;
+        public string Temperature
+        {
+            get => _temperature;
+            set
+            {
+                _temperature = value;
+                RaiseAndSetIfChanged(nameof(Temperature));
+            }
+        }
+
+        private string _windSpeed;
+        public string WindSpeed
+        {
+            get => _windSpeed;
+            set
+            {
+                _windSpeed = value;
+                RaiseAndSetIfChanged(nameof(WindSpeed));
+            }
+        }
+
+        private string _conditionDescription;
+        public string ConditionDescription
+        {
+            get => _conditionDescription;
+            set
+            {
+                _conditionDescription = value;
+                RaiseAndSetIfChanged(nameof(ConditionDescription));
+            }
+        }
+
+        private string _feelsLikeTemperature;
+        public string FeelsLikeTemperature
+        {
+            get => _feelsLikeTemperature;
+            set
+            {
+                _feelsLikeTemperature = value;
+                RaiseAndSetIfChanged(nameof(FeelsLikeTemperature));
+            }
+        }
+
+        private string _highLowTemp;
+        public string HighLowTemp
+        {
+            get => _highLowTemp;
+            set
+            {
+                _highLowTemp = value;
+                RaiseAndSetIfChanged(nameof(HighLowTemp));
+            }
+        } 
+
+        private ObservableCollection<HourlyForecastItem> _hourlyForecastItems;
+        public ObservableCollection<HourlyForecastItem> HourlyForecastItems
         {
             get => _hourlyForecastItems;
-            set {
+            set
+            {
                 _hourlyForecastItems = value;
                 RaiseAndSetIfChanged(nameof(HourlyForecastItems));
             }
         }
 
-        public HomeViewModel()
+        private WeatherService _weatherService;
+        private WeatherLocationService _weatherLocationService;
+
+        public HomeViewModel(WeatherService weatherService, WeatherLocationService weatherLocationService)
         {
-            HourlyForecastItems = new List<HourlyForecastItem>
-            {
-                new HourlyForecastItem{Temperature = "55" },
-                new HourlyForecastItem{Temperature = "56" },
-                new HourlyForecastItem{Temperature = "57" },
-                new HourlyForecastItem{Temperature = "58" }
-            };
+            _weatherService = weatherService;
+            _weatherLocationService = weatherLocationService;
 
             LocationName = "Grand Rapids";
+        }
+
+        public async Task FetchForecast()
+        {
+            Location currentLocation = await _weatherLocationService.GetLocation();
+
+            if(currentLocation != null)
+            {
+                Models.Forecast forecast = await _weatherService.GetTodaysWeather(currentLocation);
+
+                UpdateCurrentConditions(forecast);
+                UpdateHourlyConditions(forecast.HourlyConditions);
+            }
+            else
+            {
+                LocationUnknown();
+            }
+            
+        }
+
+        private void UpdateCurrentConditions(Models.Forecast forecast)
+        {
+            Temperature = $"{forecast.CurrentTemperature}\u00B0";
+            WindSpeed = $"{forecast.CurrentWindSpeed} mph";
+            ConditionDescription = forecast.CurrentConditions;
+            HighLowTemp = $"{forecast.HighTemp}\u00B0/{forecast.LowTemp}\u00B0";
+            FeelsLikeTemperature = $"Feels Like {forecast.FeelsLikeTemp}\u00B0";
+        }
+
+        private void UpdateHourlyConditions(List<WeatherCondition> hourlyConditions)
+        {
+            List<HourlyForecastItem> forecastItems = new List<HourlyForecastItem>();
+
+            foreach(WeatherCondition weatherCondition in hourlyConditions)
+            {
+                forecastItems.Add(new HourlyForecastItem
+                {
+                    Temperature = "${weatherCondition.Temperature}\u00B0",
+                    TimeOfDay = weatherCondition.Time.ToString("h:mm tt", DateTimeFormatInfo.InvariantInfo),
+                    ImageUrl = weatherCondition.ImageUrl
+                });
+            }
+
+            HourlyForecastItems = new ObservableCollection<HourlyForecastItem>(forecastItems);
+        }
+
+        private void LocationUnknown()
+        {
+
         }
     }
 }

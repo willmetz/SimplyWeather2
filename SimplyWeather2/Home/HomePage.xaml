@@ -29,20 +29,20 @@
                             </Grid.ColumnDefinitions>
 
                             <StackLayout Grid.Column="0" VerticalOptions="Center">
-                                <Label Text="52 deg" TextColor="Black"/>
-                                <Label Text="8 mph" TextColor="Black"/>
+                                <Label Text="{Binding Temperature}" TextColor="Black"/>
+                                <Label Text="{Binding WindSpeed}" TextColor="Black"/>
                             </StackLayout>
 
                             <StackLayout Grid.Column="1">
                                 <Label Text="IMAGE HERE" TextColor="Black"/>
-                                <Label Text="foggy" TextColor="Black"/>
+                                <Label Text="{Binding ConditionDescription}" TextColor="Black"/>
                             </StackLayout>
                         </Grid>
                     </Frame>
 
                     <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
-                        <Label Text="Feels Like 55 deg" TextColor="Black"/>
-                        <Label Text="65/45" TextColor="Black" HorizontalOptions="Center"/>
+                        <Label Text="{Binding FeelsLikeTemperature}" TextColor="Black"/>
+                        <Label Text="{Binding HighLowTemp}" TextColor="Black" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Grid>
             </StackLayout>

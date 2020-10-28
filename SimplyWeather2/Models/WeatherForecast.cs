@@ -22,9 +22,9 @@ namespace SimplyWeather2.Models
         public CurrentConditions Current { get; set; }
 
         [JsonProperty("hourly")]
-        public IList<HourlyConditions> Hourly { get; set; }
+        public List<HourlyConditions> Hourly { get; set; }
 
         [JsonProperty("daily")]
-        public IList<DailyConditions> Daily { get; set; }
+        public List<DailyConditions> Daily { get; set; }
     }
 }

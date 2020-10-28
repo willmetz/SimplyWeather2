@@ -7,7 +7,7 @@ namespace SimplyWeather2.Models
     public class HourlyConditions
     {
         [JsonProperty("dt")]
-        public int TimeStamp { get; set; }
+        public long TimeStamp { get; set; }
 
         [JsonProperty("temp")]
         public double Temperature { get; set; }

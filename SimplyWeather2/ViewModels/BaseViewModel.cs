@@ -20,7 +20,7 @@ namespace SimplyWeather2.ViewModels
             if (changed == null)
                 return;
 
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            changed(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

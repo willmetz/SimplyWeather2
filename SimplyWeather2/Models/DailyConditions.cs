@@ -40,7 +40,7 @@ namespace SimplyWeather2.Models
         public int Clouds { get; set; }
 
         [JsonProperty("pop")]
-        public int ProbabilityOfPercipitation { get; set; }
+        public double ProbabilityOfPercipitation { get; set; }
 
         [JsonProperty("rain")]
         public double RainVolumeMM { get; set; }

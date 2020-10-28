@@ -8,6 +8,11 @@ namespace SimplyWeather2
     {
         private Container _container;
 
+        public TService GetService<TService>() where TService : class
+        {
+            return _container.GetInstance<TService>();
+        }
+
         public App()
         {
             InitializeComponent();
@@ -33,6 +38,7 @@ namespace SimplyWeather2
         private void RegisterServices()
         {
             _container.Register<WeatherService, WeatherServiceImp>(Lifestyle.Singleton);
+            _container.Register<WeatherLocationService, WeatherLocationServiceImp>(Lifestyle.Singleton);
         }
     }
 }
