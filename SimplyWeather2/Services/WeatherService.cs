@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -30,11 +31,12 @@ namespace SimplyWeather2.Services
 
             if(weatherForecast != null)
             {
+                List<HourlyConditions> hourlyConditionsForDay = GetHourlyConditionsForDay(weatherForecast.Hourly);
                 Models.Forecast forecast = new Models.Forecast
                 {
                     CurrentTemperature = weatherForecast.Current?.Temp != null ? (int)weatherForecast.Current.Temp : 0,
-                    HighTemp = GetHighTempForDay(weatherForecast.Hourly),
-                    LowTemp = GetLowempForDay(weatherForecast.Hourly),
+                    HighTemp = GetHighTempForDay(hourlyConditionsForDay),
+                    LowTemp = GetLowempForDay(hourlyConditionsForDay),
                     CurrentWindSpeed = weatherForecast.Current?.WindSpeed != null ? (int)weatherForecast.Current.WindSpeed : 0,
                     FeelsLikeTemp = weatherForecast.Current?.FeelsLikeTemp != null ? (int)weatherForecast.Current.FeelsLikeTemp : 0,
                 };
@@ -45,7 +47,7 @@ namespace SimplyWeather2.Services
                     forecast.CurrentConditions = weatherForecast.Current.Conditions[0].Description;
                 }
 
-                forecast.HourlyConditions = GetHourlyConditions(weatherForecast.Hourly);
+                forecast.HourlyConditionsForDay = GetHourlyConditions(hourlyConditionsForDay);
 
                 return forecast;
             }
@@ -61,6 +63,7 @@ namespace SimplyWeather2.Services
             query["lon"] = location.Longitude.ToString();
             query["appid"] = AppConfig.OPEN_WEATHER_API_KEY;
             query["exclude"] = "minutely,alerts";
+            query["units"] = "imperial";
             uriBuilder.Query = query.ToString();
             HttpResponseMessage response = await _httpClient.GetAsync(uriBuilder.Uri);
 
@@ -80,6 +83,18 @@ namespace SimplyWeather2.Services
             }
 
             return null;
+        }
+
+        private List<HourlyConditions> GetHourlyConditionsForDay(List<HourlyConditions> hourlyConditions)
+        {
+            DateTime today = DateTime.Now;
+
+            var todaysConditions = hourlyConditions.Where(hourlyCondition => {
+                DateTime time = DateTimeOffset.FromUnixTimeSeconds(hourlyCondition.TimeStamp).UtcDateTime;
+                return time.ToLocalTime().DayOfYear == today.DayOfYear;
+            }).ToList();
+
+            return todaysConditions;
         }
 
 
@@ -103,7 +118,7 @@ namespace SimplyWeather2.Services
             int lowTemp = 999;
 
             foreach (HourlyConditions conditions in hourlyConditions)
-            {
+            { 
                 if (conditions.Temperature < lowTemp)
                 {
                     lowTemp = (int)conditions.Temperature;
@@ -119,9 +134,11 @@ namespace SimplyWeather2.Services
 
             foreach(HourlyConditions hourlyCondition in hourlyConditions)
             {
+                DateTime time = DateTimeOffset.FromUnixTimeSeconds(hourlyCondition.TimeStamp).UtcDateTime;
+
                 weatherConditions.Add(new WeatherCondition
                 {
-                    Time = new DateTime(hourlyCondition.TimeStamp),
+                    Time = time.ToLocalTime(),
                     ImageUrl = hourlyCondition.Weather[0].Icon,
                     Temperature = (int)hourlyCondition.Temperature
                 });

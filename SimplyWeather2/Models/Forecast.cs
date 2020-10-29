@@ -16,7 +16,7 @@ namespace SimplyWeather2.Models
         public int LowTemp;
         public string LocationName;
 
-        public List<WeatherCondition> HourlyConditions;
+        public List<WeatherCondition> HourlyConditionsForDay;
     }
 
     public class WeatherCondition

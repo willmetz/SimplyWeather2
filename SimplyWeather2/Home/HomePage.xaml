@@ -46,7 +46,10 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-            <CollectionView Grid.Row="1" ItemsSource="{Binding HourlyForecastItems}" >
+            <CollectionView Grid.Row="1" ItemsSource="{Binding HourlyForecastItems}" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <cells:HourlyForecastCell/>

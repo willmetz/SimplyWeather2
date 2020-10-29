@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace SimplyWeather2.Home
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HourlyForecastCell : Grid
+    public partial class HourlyForecastCell : Frame
     {
         public HourlyForecastCell()
         {

@@ -110,7 +110,7 @@ namespace SimplyWeather2.Home
                 Models.Forecast forecast = await _weatherService.GetTodaysWeather(currentLocation);
 
                 UpdateCurrentConditions(forecast);
-                UpdateHourlyConditions(forecast.HourlyConditions);
+                UpdateHourlyConditions(forecast.HourlyConditionsForDay);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace SimplyWeather2.Home
             {
                 forecastItems.Add(new HourlyForecastItem
                 {
-                    Temperature = "${weatherCondition.Temperature}\u00B0",
+                    Temperature = $"{weatherCondition.Temperature}\u00B0",
                     TimeOfDay = weatherCondition.Time.ToString("h:mm tt", DateTimeFormatInfo.InvariantInfo),
                     ImageUrl = weatherCondition.ImageUrl
                 });
