@@ -1,4 +1,5 @@
 ﻿using SimpleInjector;
+using SimplyWeather2.Api;
 using SimplyWeather2.Services;
 using Xamarin.Forms;
 
@@ -39,6 +40,7 @@ namespace SimplyWeather2
         {
             _container.Register<WeatherService, WeatherServiceImp>(Lifestyle.Singleton);
             _container.Register<WeatherLocationService, WeatherLocationServiceImp>(Lifestyle.Singleton);
+            _container.Register<WeatherApi, WeatherApiImp>(Lifestyle.Singleton);
         }
     }
 }

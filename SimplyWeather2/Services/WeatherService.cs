@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
+using SimplyWeather2.Api;
 using SimplyWeather2.Models;
 using Xamarin.Essentials;
 
@@ -17,17 +15,17 @@ namespace SimplyWeather2.Services
 
     public class WeatherServiceImp : WeatherService
     {
-        private HttpClient _httpClient;
+        private readonly WeatherApi _weatherApi;
 
-        public WeatherServiceImp()
+        public WeatherServiceImp(WeatherApi weatherApi)
         {
-            _httpClient = new HttpClient();
+            _weatherApi = weatherApi;
         }
 
 
         public async Task<Models.Forecast> GetTodaysWeather(Location location)
         {
-            WeatherForecast weatherForecast = await GetForecast(location);
+            WeatherForecast weatherForecast = await _weatherApi.GetForecast(location);
 
             if(weatherForecast != null)
             {
@@ -55,35 +53,7 @@ namespace SimplyWeather2.Services
             return null;
         }
 
-        private async Task<WeatherForecast> GetForecast(Location location)
-        {
-            UriBuilder uriBuilder = new UriBuilder("https://api.openweathermap.org/data/2.5/onecall");
-            var query = HttpUtility.ParseQueryString(string.Empty);
-            query["lat"] = location.Latitude.ToString();
-            query["lon"] = location.Longitude.ToString();
-            query["appid"] = AppConfig.OPEN_WEATHER_API_KEY;
-            query["exclude"] = "minutely,alerts";
-            query["units"] = "imperial";
-            uriBuilder.Query = query.ToString();
-            HttpResponseMessage response = await _httpClient.GetAsync(uriBuilder.Uri);
-
-            if(response?.IsSuccessStatusCode == true)
-            {
-                try
-                {
-                    string rawContent = await response.Content.ReadAsStringAsync();
-
-                    return JsonConvert.DeserializeObject<WeatherForecast>(rawContent);
-                }
-                catch(Exception e)
-                {
-                    //TODO - handle things here
-                    throw e;
-                }
-            }
-
-            return null;
-        }
+        
 
         private List<HourlyConditions> GetHourlyConditionsForDay(List<HourlyConditions> hourlyConditions)
         {

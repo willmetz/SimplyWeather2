@@ -17,5 +17,6 @@
     <Folder Include="Home\" />
     <Folder Include="Forecast\" />
     <Folder Include="Radar\" />
+    <Folder Include="Api\" />
   </ItemGroup>
 </Project>
