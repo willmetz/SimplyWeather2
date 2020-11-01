@@ -8,6 +8,8 @@ using Xamarin.Essentials;
 
 namespace SimplyWeather2.Services
 {
+    
+
     public interface WeatherService
     {
         Task<Models.Forecast> GetTodaysWeather(Location location);
@@ -16,6 +18,7 @@ namespace SimplyWeather2.Services
     public class WeatherServiceImp : WeatherService
     {
         private readonly WeatherApi _weatherApi;
+        private readonly string _imagePrefix = "http://openweathermap.org/img/wn/";
 
         public WeatherServiceImp(WeatherApi weatherApi)
         {
@@ -41,7 +44,7 @@ namespace SimplyWeather2.Services
 
                 if (weatherForecast.Current?.Conditions?.Count > 0 )
                 {
-                    forecast.CurrentConditionsImageUrl = weatherForecast.Current.Conditions[0].Icon;
+                    forecast.CurrentConditionsImageUrl = GetUrlForImageIcon(weatherForecast.Current.Conditions[0].Icon);
                     forecast.CurrentConditions = weatherForecast.Current.Conditions[0].Description;
                 }
 
@@ -109,12 +112,17 @@ namespace SimplyWeather2.Services
                 weatherConditions.Add(new WeatherCondition
                 {
                     Time = time.ToLocalTime(),
-                    ImageUrl = hourlyCondition.Weather[0].Icon,
+                    ImageUrl = GetUrlForImageIcon(hourlyCondition.Weather[0].Icon),
                     Temperature = (int)hourlyCondition.Temperature
                 });
             }
 
             return weatherConditions;
+        }
+
+        private string GetUrlForImageIcon(string icon)
+        {
+            return _imagePrefix + icon + ".png";
         }
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Home.HomePage"
              xmlns:cells="clr-namespace:SimplyWeather2.Home;assembly=SimplyWeather2"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              BackgroundColor="Aqua">
     <ContentPage.Content>
         <Grid>
@@ -34,8 +35,9 @@
                             </StackLayout>
 
                             <StackLayout Grid.Column="1">
-                                <Label Text="IMAGE HERE" TextColor="Black"/>
-                                <Label Text="{Binding ConditionDescription}" TextColor="Black"/>
+                                <ffimageloading:CachedImage Source="{Binding CurrentConditionsImage}" HeightRequest="50" WidthRequest="50"
+                                                            Aspect="AspectFit" DownsampleToViewSize="False" HorizontalOptions="Center"/>
+                                <Label Text="{Binding ConditionDescription}" TextColor="Black" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                             </StackLayout>
                         </Grid>
                     </Frame>
@@ -46,9 +48,9 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-            <CollectionView Grid.Row="1" ItemsSource="{Binding HourlyForecastItems}" VerticalOptions="FillAndExpand">
+            <CollectionView Grid.Row="1" ItemsSource="{Binding HourlyForecastItems}" VerticalOptions="FillAndExpand" Margin="4,0">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -77,6 +77,17 @@ namespace SimplyWeather2.Home
                 _highLowTemp = value;
                 RaiseAndSetIfChanged(nameof(HighLowTemp));
             }
+        }
+
+        private string _currentConditionsImage;
+        public string CurrentConditionsImage
+        {
+            get => _currentConditionsImage;
+            set
+            {
+                _currentConditionsImage = value;
+                RaiseAndSetIfChanged(nameof(CurrentConditionsImage));
+            }
         } 
 
         private ObservableCollection<HourlyForecastItem> _hourlyForecastItems;
@@ -126,6 +137,7 @@ namespace SimplyWeather2.Home
             ConditionDescription = forecast.CurrentConditions;
             HighLowTemp = $"{forecast.HighTemp}\u00B0/{forecast.LowTemp}\u00B0";
             FeelsLikeTemperature = $"Feels Like {forecast.FeelsLikeTemp}\u00B0";
+            CurrentConditionsImage = forecast.CurrentConditionsImageUrl;
         }
 
         private void UpdateHourlyConditions(List<WeatherCondition> hourlyConditions)

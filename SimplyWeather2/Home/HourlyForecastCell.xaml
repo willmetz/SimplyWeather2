@@ -2,10 +2,12 @@
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        x:Class="SimplyWeather2.Home.HourlyForecastCell"
-       HeightRequest="50"
+       xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+       HeightRequest="75"
        HasShadow="True"
-       BackgroundColor="Blue">
-    <Grid >
+       BackgroundColor="Blue"
+       Padding="0">
+    <Grid VerticalOptions="Fill" Padding="0" RowSpacing="0" Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -13,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Text="{Binding TimeOfDay}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" TextColor="White"/>
-        <Label Text="{Binding Temperature}" Grid.Column="1" VerticalOptions="Center" TextColor="White"/>
-        <Label Text="{Binding ImageUrl}" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" TextColor="White"/>
+        <Label Text="{Binding Temperature}" Grid.Column="1" VerticalOptions="CenterAndExpand" TextColor="White" />
+        <ffimageloading:CachedImage Source="{Binding ImageUrl}" HeightRequest="60" WidthRequest="60" Aspect="Fill" DownsampleToViewSize="False" Grid.Column="2" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
     </Grid>
 </Frame>
