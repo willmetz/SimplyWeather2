@@ -2,8 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Forecast.ForecastPage"
-             BackgroundColor="Pink">
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="Aqua"
+             >
     <ContentPage.Content>
-        <Label Text="Forecast" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <CollectionView ItemsSource="{Binding DailyForecasts}" >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="true" Padding="0" HeightRequest="120" BackgroundColor="Blue">
+                            <StackLayout >
+                                <Label Text="Saturday October 31" HorizontalOptions="CenterAndExpand"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Hi Temp 49" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="Low Temp 40" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Wind Speed" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="22 mph (W)" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="2" VerticalOptions="CenterAndExpand">
+                                        <ffimageloading:CachedImage Source="http://openweathermap.org/img/wn/10d@2x.png" HeightRequest="50" WidthRequest="50"
+                                                                Aspect="AspectFit" DownsampleToViewSize="False" HorizontalOptions="Center"/>
+
+                                        <Label Text="Clear Sky" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
     </ContentPage.Content>
 </ContentPage>
