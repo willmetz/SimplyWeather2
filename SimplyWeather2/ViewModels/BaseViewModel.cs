@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-using Xamarin.Forms;
-
-using SimplyWeather2.Models;
-using SimplyWeather2.Services;
 
 namespace SimplyWeather2.ViewModels
 {
@@ -14,8 +7,10 @@ namespace SimplyWeather2.ViewModels
     {
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaiseAndSetIfChanged([CallerMemberName] string propertyName = "")
+        protected void RaiseAndSetIfChanged<T>(T newValue, ref T property, [CallerMemberName] string propertyName = "")
         {
+            property = newValue;
+
             var changed = PropertyChanged;
             if (changed == null)
                 return;

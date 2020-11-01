@@ -17,88 +17,56 @@ namespace SimplyWeather2.Home
         public string LocationName
         {
             get => _locationName;
-            set
-            {
-                _locationName = value;
-                RaiseAndSetIfChanged(nameof(LocationName));
-            }
+            set => RaiseAndSetIfChanged(value, ref _locationName, nameof(LocationName));
         }
 
         private string _temperature;
         public string Temperature
         {
             get => _temperature;
-            set
-            {
-                _temperature = value;
-                RaiseAndSetIfChanged(nameof(Temperature));
-            }
+            set => RaiseAndSetIfChanged(value, ref _temperature, nameof(Temperature));
         }
 
         private string _windSpeed;
         public string WindSpeed
         {
             get => _windSpeed;
-            set
-            {
-                _windSpeed = value;
-                RaiseAndSetIfChanged(nameof(WindSpeed));
-            }
+            set => RaiseAndSetIfChanged(value, ref _windSpeed, nameof(WindSpeed));
         }
 
         private string _conditionDescription;
         public string ConditionDescription
         {
             get => _conditionDescription;
-            set
-            {
-                _conditionDescription = value;
-                RaiseAndSetIfChanged(nameof(ConditionDescription));
-            }
+            set => RaiseAndSetIfChanged(value, ref _conditionDescription, nameof(ConditionDescription));
         }
 
         private string _feelsLikeTemperature;
         public string FeelsLikeTemperature
         {
             get => _feelsLikeTemperature;
-            set
-            {
-                _feelsLikeTemperature = value;
-                RaiseAndSetIfChanged(nameof(FeelsLikeTemperature));
-            }
+            set => RaiseAndSetIfChanged(value, ref _feelsLikeTemperature, nameof(FeelsLikeTemperature));
         }
 
         private string _highLowTemp;
         public string HighLowTemp
         {
             get => _highLowTemp;
-            set
-            {
-                _highLowTemp = value;
-                RaiseAndSetIfChanged(nameof(HighLowTemp));
-            }
+            set => RaiseAndSetIfChanged(value, ref _highLowTemp, nameof(HighLowTemp));
         }
 
         private string _currentConditionsImage;
         public string CurrentConditionsImage
         {
             get => _currentConditionsImage;
-            set
-            {
-                _currentConditionsImage = value;
-                RaiseAndSetIfChanged(nameof(CurrentConditionsImage));
-            }
+            set => RaiseAndSetIfChanged(value, ref _currentConditionsImage, nameof(CurrentConditionsImage));            
         } 
 
         private ObservableCollection<HourlyForecastItem> _hourlyForecastItems;
         public ObservableCollection<HourlyForecastItem> HourlyForecastItems
         {
             get => _hourlyForecastItems;
-            set
-            {
-                _hourlyForecastItems = value;
-                RaiseAndSetIfChanged(nameof(HourlyForecastItems));
-            }
+            set => RaiseAndSetIfChanged(value, ref _hourlyForecastItems, nameof(HourlyForecastItems));
         }
 
         private WeatherService _weatherService;
