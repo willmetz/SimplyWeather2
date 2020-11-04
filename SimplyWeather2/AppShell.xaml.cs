@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace SimplyWeather2
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
@@ -13,6 +13,8 @@ namespace SimplyWeather2
             Routing.RegisterRoute("Radar", typeof(RadarPage));
             Routing.RegisterRoute("Home", typeof(HomePage));
             Routing.RegisterRoute("Forecast", typeof(ForecastPage));
+
+            CurrentItem.CurrentItem = home;
         }
 
     }

@@ -27,8 +27,8 @@
         </ResourceDictionary>
     </Shell.Resources>
     <TabBar>
-        <ShellContent Title="Forecast" Icon="forecast_icon" ContentTemplate="{DataTemplate forecast:ForecastPage}" Route="Forecast"/>
-        <ShellContent Title="Home" Icon="home_icon" ContentTemplate="{DataTemplate home:HomePage}"  Route="Home"/>
-        <ShellContent Title="Radar" Icon="radar_icon" ContentTemplate="{DataTemplate radar:RadarPage}"  Route="Radar"/>
+        <ShellContent x:Name="forecast" Title="Forecast" Icon="forecast_icon" ContentTemplate="{DataTemplate forecast:ForecastPage}" Route="Forecast"/>
+        <ShellContent x:Name="home"  Title="Home" Icon="home_icon" ContentTemplate="{DataTemplate home:HomePage}"  Route="Home"/>
+        <ShellContent x:Name="radar" Title="Radar" Icon="radar_icon" ContentTemplate="{DataTemplate radar:RadarPage}"  Route="Radar"/>
     </TabBar>
 </Shell>
