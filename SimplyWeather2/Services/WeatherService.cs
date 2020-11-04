@@ -13,6 +13,7 @@ namespace SimplyWeather2.Services
     public interface WeatherService
     {
         Task<Models.Forecast> GetTodaysWeather(Location location);
+        Task<List<DayForecast>> GetExtendedForecast(Location location);
     }
 
     public class WeatherServiceImp : WeatherService
@@ -123,6 +124,77 @@ namespace SimplyWeather2.Services
         private string GetUrlForImageIcon(string icon)
         {
             return _imagePrefix + icon + ".png";
+        }
+
+        public async Task<List<DayForecast>> GetExtendedForecast(Location location)
+        {
+            WeatherForecast weatherForecast = await _weatherApi.GetForecast(location);
+
+            if(weatherForecast != null)
+            {
+                List<DayForecast> daysForecast = GetDayForecast(weatherForecast.Daily);
+
+                return daysForecast;
+            }
+
+            return null;
+        }
+
+        private List<DayForecast> GetDayForecast(List<DailyConditions> dailyConditions)
+        {
+            List<DayForecast> forecast = new List<DayForecast>();
+
+            foreach(DailyConditions conditions in dailyConditions)
+            {
+                DateTime time = DateTimeOffset.FromUnixTimeSeconds(conditions.Timestamp).UtcDateTime;
+
+                forecast.Add(new DayForecast
+                {
+                    TimeStamp = time.ToLocalTime(),
+                    HiTemp = conditions.Temperatures?.Max != null ? (int)conditions.Temperatures.Max : 0,
+                    LowTemp = conditions.Temperatures?.Min != null ? (int)conditions.Temperatures.Min : 0,
+                    WindSpeed = (int)conditions.WindSpeed,
+                    WindDirection = CardinalDirection(conditions.WindDirection),
+                    ImageUrl = GetUrlForImageIcon(conditions.Weather[0].Icon),
+                    ConditionsDescription = conditions.Weather[0].Description
+                }) ;
+            }
+
+            return forecast;
+        }
+
+        private string CardinalDirection(int windDirection)
+        {
+            if( windDirection >= 23 && windDirection < 68)
+            {
+                return "NE";
+            }
+            else if(windDirection >= 68 && windDirection < 113)
+            {
+                return "N";
+            }
+            else if(windDirection >= 113 && windDirection < 158)
+            {
+                return "NW";
+            }
+            else if(windDirection >= 158 && windDirection < 203)
+            {
+                return "W";
+            }
+            else if (windDirection >= 203 && windDirection < 248)
+            {
+                return "SW";
+            }
+            else if (windDirection >= 248 && windDirection < 293)
+            {
+                return "S";
+            }
+            else if (windDirection >= 293 && windDirection < 338)
+            {
+                return "SE";
+            }
+
+            return "E";
         }
     }
 }

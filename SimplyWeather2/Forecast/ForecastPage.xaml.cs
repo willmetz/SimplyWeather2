@@ -13,9 +13,12 @@ namespace SimplyWeather2.Forecast
         {
             InitializeComponent();
 
-            WeatherService weatherService = ((App)Application.Current).GetService<WeatherService>();
+            App app = (App)Application.Current;
 
-            _viewModel = new ForecastViewModel(weatherService);
+            WeatherService weatherService = app.GetService<WeatherService>();
+            WeatherLocationService weatherLocationService = app.GetService<WeatherLocationService>();
+
+            _viewModel = new ForecastViewModel(weatherService, weatherLocationService);
             BindingContext = _viewModel;
         }
 

@@ -14,7 +14,7 @@
                     <DataTemplate>
                         <Frame HasShadow="true" Padding="0" HeightRequest="120" BackgroundColor="Blue">
                             <StackLayout >
-                                <Label Text="Saturday October 31" HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding CalendarDay}" HorizontalOptions="CenterAndExpand"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -23,20 +23,20 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                                        <Label Text="Hi Temp 49" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                                        <Label Text="Low Temp 40" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding HiTemp}" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding LowTemp}" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
                                         <Label Text="Wind Speed" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                                        <Label Text="22 mph (W)" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding WindSpeed}" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="2" VerticalOptions="CenterAndExpand">
-                                        <ffimageloading:CachedImage Source="http://openweathermap.org/img/wn/10d@2x.png" HeightRequest="50" WidthRequest="50"
+                                        <ffimageloading:CachedImage Source="{Binding ImageUrl}" HeightRequest="50" WidthRequest="50"
                                                                 Aspect="AspectFit" DownsampleToViewSize="False" HorizontalOptions="Center"/>
 
-                                        <Label Text="Clear Sky" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding ConditionDescription}" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>
