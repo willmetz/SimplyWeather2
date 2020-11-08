@@ -13,21 +13,30 @@ namespace SimplyWeather2.Services
 
 
     public class RadarServiceImp : RadarService
-    {
-        public RadarServiceImp()
-        {
-        }
-
+    { 
         public List<RadarTile> GetRadarTiles(Location location, int zoom)
         {
+            List<RadarTile> radarTiles = new List<RadarTile>();
+
             Point centerTileCoordinates = GetCenterCoordinate(location, zoom);
 
-            RadarTile centerTile = new RadarTile()
+            //add tiles for a 9x9 grid starting in the upper left corner
+            for(int rowOffset = -1; rowOffset < 2; rowOffset++)
             {
-                coordinate = centerTileCoordinates,
-                MapUrl = GetMapUrl(centerTileCoordinates, zoom),
-                RadarUrl = GetRadarUrl(centerTileCoordinates, zoom)
-            };
+                for(int columnOffset = -1; columnOffset < 2; columnOffset++)
+                {
+                    Point tileCoordinate = new Point(centerTileCoordinates.X + columnOffset, centerTileCoordinates.Y + rowOffset);
+
+                    radarTiles.Add(new RadarTile
+                    {
+                        coordinate = tileCoordinate,
+                        MapUrl = GetMapUrl(tileCoordinate, zoom),
+                        RadarUrl = GetRadarUrl(tileCoordinate, zoom)
+                    });
+                }
+            }
+
+            return radarTiles;
         }
 
 

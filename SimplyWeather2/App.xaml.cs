@@ -41,6 +41,7 @@ namespace SimplyWeather2
             _container.Register<WeatherService, WeatherServiceImp>(Lifestyle.Singleton);
             _container.Register<WeatherLocationService, WeatherLocationServiceImp>(Lifestyle.Singleton);
             _container.Register<WeatherApi, WeatherApiImp>(Lifestyle.Singleton);
+            _container.Register<RadarService, RadarServiceImp>();
         }
     }
 }
