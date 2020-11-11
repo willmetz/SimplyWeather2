@@ -8,7 +8,7 @@ namespace SimplyWeather2.Radar
     public partial class RadarPage : ContentPage
     {
         private RadarViewModel _viewModel;
-        private double _screenWidth;
+        private double _screenWidth = -1;
 
         public RadarPage()
         {
@@ -32,16 +32,21 @@ namespace SimplyWeather2.Radar
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            _screenWidth = width;
-            UpdateGridRowWidths();
+            if(_screenWidth < 0)
+            {
+                _screenWidth = width;
+                UpdateGridRowWidths();
+            }
             base.OnSizeAllocated(width, height);
         }
 
         private void UpdateGridRowWidths()
         {
+            var widthHeight = _screenWidth / 3;
+
             foreach (ColumnDefinition def in MapGrid.ColumnDefinitions)
-            {
-                def.Width = _screenWidth / 3;
+            {                
+                def.Width = widthHeight;
             }
         }
     }

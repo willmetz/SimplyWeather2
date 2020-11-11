@@ -6,55 +6,6 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              BackgroundColor="Green">
     <ContentPage.Content>
-
-        <!--<StackLayout HorizontalOptions="FillAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                </Grid>
-                <ffimageloading:CachedImage Source="{Binding MapUrl_UL}" Grid.Column="0" Aspect="AspectFit" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_UM}" Grid.Column="1" Aspect="AspectFit" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_UR}" Grid.Column="2" Aspect="AspectFit" />
-
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" HeightRequest="100">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-                <ffimageloading:CachedImage Source="{Binding MapUrl_L}" Grid.Column="0" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_M}" Grid.Column="1" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_R}" Grid.Column="2" />
-
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" HeightRequest="100">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-                <ffimageloading:CachedImage Source="{Binding MapUrl_LL}" Grid.Column="0" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_LM}"  Grid.Column="1" />
-                <ffimageloading:CachedImage Source="{Binding MapUrl_LR}" Grid.Column="2" />
-
-            </StackLayout>
-
-        </StackLayout>-->
-
         <Grid x:Name="MapGrid" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -68,16 +19,26 @@
             </Grid.ColumnDefinitions>
 
             <ffimageloading:CachedImage Source="{Binding MapUrl_UL}" Grid.Row="0" Grid.Column="0" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_UL}" Grid.Row="0" Grid.Column="0" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_UM}" Grid.Row="0" Grid.Column="1" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_UM}" Grid.Row="0" Grid.Column="1" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_UR}" Grid.Row="0" Grid.Column="2" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_UR}" Grid.Row="0" Grid.Column="2" />
 
             <ffimageloading:CachedImage Source="{Binding MapUrl_L}" Grid.Row="1" Grid.Column="0" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_L}" Grid.Row="1" Grid.Column="0" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_M}" Grid.Row="1" Grid.Column="1" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_M}" Grid.Row="1" Grid.Column="1" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_R}" Grid.Row="1" Grid.Column="2" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_R}" Grid.Row="1" Grid.Column="2" />
 
             <ffimageloading:CachedImage Source="{Binding MapUrl_LL}" Grid.Row="2" Grid.Column="0" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_LL}" Grid.Row="2" Grid.Column="0" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_LM}" Grid.Row="2" Grid.Column="1" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_LM}" Grid.Row="2" Grid.Column="1" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_LR}" Grid.Row="2" Grid.Column="2" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_LR}" Grid.Row="2" Grid.Column="2" />
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
