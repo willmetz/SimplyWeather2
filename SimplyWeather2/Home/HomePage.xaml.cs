@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using SimplyWeather2.Controls;
 using SimplyWeather2.Services;
 using Xamarin.Forms;
 
 namespace SimplyWeather2.Home
 {
-    public partial class HomePage : ContentPage
+    public partial class HomePage : BasePage
     {
         private HomeViewModel _viewModel;
 
@@ -18,7 +19,15 @@ namespace SimplyWeather2.Home
 
             _viewModel = new HomeViewModel(weatherService, weatherLocationService);
 
+            _viewModel.OnNavigateToLocationPage = navigateToLocationPage;
+
             BindingContext = _viewModel;
+
+        }
+
+        private async void navigateToLocationPage()
+        {
+            await Shell.Current.GoToAsync("UpdateLocation", true);
         }
 
         protected override async void OnAppearing()

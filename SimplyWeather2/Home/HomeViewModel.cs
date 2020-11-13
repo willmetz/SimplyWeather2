@@ -7,6 +7,7 @@ using SimplyWeather2.Models;
 using SimplyWeather2.Services;
 using SimplyWeather2.ViewModels;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace SimplyWeather2.Home
 {
@@ -72,17 +73,24 @@ namespace SimplyWeather2.Home
         private WeatherService _weatherService;
         private WeatherLocationService _weatherLocationService;
 
+        public Command OnLocationSelected;
+        public Action OnNavigateToLocationPage;
+
         public HomeViewModel(WeatherService weatherService, WeatherLocationService weatherLocationService)
         {
             _weatherService = weatherService;
             _weatherLocationService = weatherLocationService;
 
             LocationName = "Grand Rapids";
+
+            OnLocationSelected = new Command(() => {
+                OnNavigateToLocationPage?.Invoke();
+                });
         }
 
         public async Task FetchForecast()
         {
-            Location currentLocation = await _weatherLocationService.GetLocation();
+            SimplyWeatherLocation currentLocation = _weatherLocationService.GetCurrentLocation();
 
             if(currentLocation != null)
             {
@@ -127,7 +135,7 @@ namespace SimplyWeather2.Home
 
         private void LocationUnknown()
         {
-
+            //TODO
         }
     }
 }

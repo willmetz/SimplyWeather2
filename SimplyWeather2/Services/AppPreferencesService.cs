@@ -13,7 +13,7 @@ namespace SimplyWeather2.Services
         string GetLocationName();
     }
 
-    public class AppPreferencesServiceImp
+    public class AppPreferencesServiceImp : AppPreferencesService
     {
         private readonly string LatitudeKey = "Latitude";
         private readonly string LongitudeKey = "Longitude";

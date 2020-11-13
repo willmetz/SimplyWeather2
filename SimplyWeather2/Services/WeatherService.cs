@@ -12,8 +12,9 @@ namespace SimplyWeather2.Services
 
     public interface WeatherService
     {
-        Task<Models.Forecast> GetTodaysWeather(Location location);
-        Task<List<DayForecast>> GetExtendedForecast(Location location);
+        Task<Models.Forecast> GetTodaysWeather(SimplyWeatherLocation location);
+        Task<List<DayForecast>> GetExtendedForecast(SimplyWeatherLocation location);
+        Task<string> GetForecastLocationName(SimplyWeatherLocation location);
     }
 
     public class WeatherServiceImp : WeatherService
@@ -27,7 +28,7 @@ namespace SimplyWeather2.Services
         }
 
 
-        public async Task<Models.Forecast> GetTodaysWeather(Location location)
+        public async Task<Models.Forecast> GetTodaysWeather(SimplyWeatherLocation location)
         {
             WeatherForecast weatherForecast = await _weatherApi.GetForecast(location);
 
@@ -126,7 +127,7 @@ namespace SimplyWeather2.Services
             return _imagePrefix + icon + ".png";
         }
 
-        public async Task<List<DayForecast>> GetExtendedForecast(Location location)
+        public async Task<List<DayForecast>> GetExtendedForecast(SimplyWeatherLocation location)
         {
             WeatherForecast weatherForecast = await _weatherApi.GetForecast(location);
 
@@ -195,6 +196,18 @@ namespace SimplyWeather2.Services
             }
 
             return "E";
+        }
+
+        public async Task<string> GetForecastLocationName(SimplyWeatherLocation location)
+        {
+            CitiesInCircle citiesInCircle = await _weatherApi.GetLocationName(location);
+
+            if(citiesInCircle != null && citiesInCircle.Cities?.Count > 0)
+            {
+                return citiesInCircle.Cities.FirstOrDefault().CityName;
+            }
+
+            return "Unknown";
         }
     }
 }

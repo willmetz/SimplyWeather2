@@ -24,10 +24,10 @@ namespace SimplyWeather2.Radar
         }
 
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await _viewModel.UpdateRadar();
+            _viewModel.UpdateRadar();
         }
 
         protected override void OnSizeAllocated(double width, double height)

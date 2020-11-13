@@ -33,7 +33,7 @@ namespace SimplyWeather2.Forecast
         {
             DailyForecasts = new ObservableCollection<DailyForecastItem>();
 
-            Location location = await _weatherLocationService.GetLocation();
+            SimplyWeatherLocation location = _weatherLocationService.GetCurrentLocation();
             List<DayForecast> forecast = await _weatherService.GetExtendedForecast(location);
 
             forecast.ForEach(day => DailyForecasts.Add(new DailyForecastItem(day)));

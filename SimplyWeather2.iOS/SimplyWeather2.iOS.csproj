@@ -128,6 +128,10 @@
     <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_1x.png" />
     <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_2x.png" />
     <ImageAsset Include="Assets.xcassets\forecast_icon.imageset\baseline_calendar_today_white_24pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\location_icon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\location_icon.imageset\location_1x.png" />
+    <ImageAsset Include="Assets.xcassets\location_icon.imageset\location_2x.png" />
+    <ImageAsset Include="Assets.xcassets\location_icon.imageset\location_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -161,5 +165,6 @@
     <Folder Include="Assets.xcassets\home_icon.imageset\" />
     <Folder Include="Assets.xcassets\radar_icon.imageset\" />
     <Folder Include="Assets.xcassets\forecast_icon.imageset\" />
+    <Folder Include="Assets.xcassets\location_icon.imageset\" />
   </ItemGroup>
 </Project>

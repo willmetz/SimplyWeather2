@@ -8,13 +8,13 @@ namespace SimplyWeather2.Services
 {
     public interface RadarService
     {
-        List<RadarTile> GetRadarTiles(Location location, int zoom);
+        List<RadarTile> GetRadarTiles(SimplyWeatherLocation location, int zoom);
     }
 
 
     public class RadarServiceImp : RadarService
     { 
-        public List<RadarTile> GetRadarTiles(Location location, int zoom)
+        public List<RadarTile> GetRadarTiles(SimplyWeatherLocation location, int zoom)
         {
             List<RadarTile> radarTiles = new List<RadarTile>();
 
@@ -40,7 +40,7 @@ namespace SimplyWeather2.Services
         }
 
 
-        private Point GetCenterCoordinate(Location location, int zoom)
+        private Point GetCenterCoordinate(SimplyWeatherLocation location, int zoom)
         {
             double n = Math.Pow(2, zoom);
             double xTile = n * ((location.Longitude + 180.0) / 360.0);

@@ -21,12 +21,23 @@ namespace SimplyWeather2.Location
 
         private readonly WeatherLocationService _locationService;
         private readonly AppPreferencesService _appPreferenceService;
+        private readonly WeatherService _weatherService;
 
-        public LocationViewModel(WeatherLocationService locationService, AppPreferencesService appPreferencesService)
+        public LocationViewModel(WeatherLocationService locationService, AppPreferencesService appPreferencesService, WeatherService weatherService)
         {
             _locationService = locationService;
             _appPreferenceService = appPreferencesService;
+            _weatherService = weatherService;
             OnUpdateLocation = new Command(async () => await LocationUpdateRequested());
+
+            if(_appPreferenceService.GetLocationName() != string.Empty)
+            {
+                CurrentLocation = _appPreferenceService.GetLocationName();
+            }
+            else
+            {
+                CurrentLocation = "Unknown";
+            }
 
         }
 
@@ -34,11 +45,18 @@ namespace SimplyWeather2.Location
         {
             SimplyWeatherLocation location =  await _locationService.UpdateLocation(new System.Threading.CancellationTokenSource());
 
-            //fetch location info from weather API
+            if(location.State == LocationState.LocationReady)
+            {
+                //fetch location info from weather API
+                string cityName = await _weatherService.GetForecastLocationName(location);
 
-            //update prefs with location info
+                //update prefs with location info
+                _appPreferenceService.SetLocationName(cityName);
 
-            //update the UI
+                //update the UI
+                CurrentLocation = cityName;
+            }
+            
         }
     }
 }

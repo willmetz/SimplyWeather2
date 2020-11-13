@@ -136,9 +136,9 @@ namespace SimplyWeather2.Radar
             _weatherLocationService = weatherLocationService;
         }
 
-        public async Task UpdateRadar()
+        public void UpdateRadar()
         {
-            Location location = await _weatherLocationService.GetLocation();
+            SimplyWeatherLocation location = _weatherLocationService.GetCurrentLocation();
 
             if(location != null)
             {

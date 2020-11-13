@@ -19,5 +19,6 @@
     <Folder Include="Radar\" />
     <Folder Include="Api\" />
     <Folder Include="Location\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>
