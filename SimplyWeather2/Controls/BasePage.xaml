@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SimplyWeather2.Controls.BasePage">
+             x:Class="SimplyWeather2.Controls.BasePage"
+             NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <Grid  x:Name="BaseContentGrid" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid  RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0" BackgroundColor="Blue">
+                <Button x:Name="LocationMenuItem" ImageSource="location_icon" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent"/>
+            </Grid>
+
+            <Grid Grid.Row="1" x:Name="BaseContentGrid" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

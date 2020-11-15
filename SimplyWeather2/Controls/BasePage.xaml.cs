@@ -28,8 +28,6 @@ namespace SimplyWeather2.Controls
             }
         }
 
-        private ToolbarItem LocationItem;
-
         public BasePage()
         {
             InitializeComponent();
@@ -38,26 +36,20 @@ namespace SimplyWeather2.Controls
             {
                 ShowLocationMenuItem();
             }
+
+            Shell.SetNavBarIsVisible(this, false);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if(LocationItem != null)
-            {
-                LocationItem.Clicked += OnNavigateToUpdateLocation;
-            }
-            
+            LocationMenuItem.Clicked += OnNavigateToUpdateLocation;            
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            if (LocationItem != null)
-            {
-                LocationItem.Clicked -= OnNavigateToUpdateLocation;
-            }
+            LocationMenuItem.Clicked -= OnNavigateToUpdateLocation;
         }
 
         protected void OnNavigateToUpdateLocation(object sender, EventArgs e)
@@ -68,25 +60,12 @@ namespace SimplyWeather2.Controls
         private void ShowLocationMenuItem()
         {
 
-            LocationItem = new ToolbarItem
-            {
-                Text = "Location",
-                IconImageSource = ImageSource.FromFile("location_icon"),
-                Order = ToolbarItemOrder.Primary,
-                Priority = 0
-            };
-            ToolbarItems.Add(LocationItem);
-            LocationItem.Clicked += OnNavigateToUpdateLocation;
+            LocationMenuItem.IsVisible = true;
         }
                 
         private void RemoveLocationMenuItem()
         {
-            if(LocationItem != null)
-            {
-                LocationItem.Clicked -= OnNavigateToUpdateLocation;
-                ToolbarItems.Remove(LocationItem);
-                LocationItem = null;
-            }
+            LocationMenuItem.IsVisible = false;
         }
     }
 }
