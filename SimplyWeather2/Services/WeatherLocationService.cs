@@ -35,7 +35,7 @@ namespace SimplyWeather2.Services
                 Debug.WriteLine("Error retrieving last known location");
             }
 
-            if(location?.State == LocationState.LocationUnknown)
+            if(location?.State != LocationState.LocationReady)
             {
                 Debug.WriteLine("Last known location is not available, getting new location");
                 location = await FetchNewLocation(cts);

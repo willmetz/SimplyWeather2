@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using SimplyWeather2.Models;
 using SimplyWeather2.Services;
 using SimplyWeather2.ViewModels;
@@ -17,7 +18,7 @@ namespace SimplyWeather2.Location
             set => RaiseAndSetIfChanged(value, ref _currentLocation, nameof(CurrentLocation));
         }
 
-        public Command OnUpdateLocation;
+        public ICommand OnUpdateLocation { get; private set; }
 
         private readonly WeatherLocationService _locationService;
         private readonly AppPreferencesService _appPreferenceService;

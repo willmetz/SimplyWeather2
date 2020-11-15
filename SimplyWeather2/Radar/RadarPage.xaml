@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Radar.RadarPage"
              xmlns:vm="clr-namespace:SimplyWeather2.Radar"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             BackgroundColor="Green">
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <Grid x:Name="MapGrid" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
