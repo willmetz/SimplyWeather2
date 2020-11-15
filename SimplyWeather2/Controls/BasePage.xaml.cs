@@ -60,7 +60,7 @@ namespace SimplyWeather2.Controls
             }
         }
 
-        private void OnNavigateToUpdateLocation(object sender, EventArgs e)
+        protected void OnNavigateToUpdateLocation(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("UpdateLocation", true);
         }

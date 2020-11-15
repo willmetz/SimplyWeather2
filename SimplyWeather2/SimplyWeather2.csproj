@@ -20,5 +20,6 @@
     <Folder Include="Api\" />
     <Folder Include="Location\" />
     <Folder Include="Controls\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

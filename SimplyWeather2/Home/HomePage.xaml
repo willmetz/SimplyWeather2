@@ -4,8 +4,15 @@
              x:Class="SimplyWeather2.Home.HomePage"
              xmlns:cells="clr-namespace:SimplyWeather2.Home;assembly=SimplyWeather2"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:SimplyWeather2.Controls;assembly=SimplyWeather2"
+             xmlns:controls="clr-namespace:SimplyWeather2.Controls"
+             xmlns:converters="clr-namespace:SimplyWeather2.Converters"
+                   HasLocationMenuItem="True"
              BackgroundColor="Aqua">
+    <controls:BasePage.Resources>
+        <ResourceDictionary>
+            <converters:BoolInverter x:Key="boolInverter" />
+        </ResourceDictionary>
+    </controls:BasePage.Resources>
     <controls:BasePage.BasePageContent>
         <Grid>
 
@@ -14,7 +21,7 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" Margin="8">
+            <StackLayout Grid.Row="0" Margin="8" IsVisible="{Binding ShowLocationUnknown,Converter={StaticResource boolInverter}}">
                 <Label Text="{Binding LocationName}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="18"/>
 
                 <Grid VerticalOptions="CenterAndExpand">
@@ -59,6 +66,14 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+
+            <StackLayout Spacing="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ShowLocationUnknown}" Grid.RowSpan="2">
+
+                <Label Text="Location Unknown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Label Text="Please update current location to get the latest forecast" FontSize="15" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Button x:Name="UpdateLocation" Text="Update Location" HorizontalOptions="Center" />
+            </StackLayout>
 
         </Grid>
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using SimplyWeather2.Models;
 using SimplyWeather2.Services;
 using SimplyWeather2.ViewModels;
@@ -70,34 +71,37 @@ namespace SimplyWeather2.Home
             set => RaiseAndSetIfChanged(value, ref _hourlyForecastItems, nameof(HourlyForecastItems));
         }
 
+        private bool _showLocationUnkonwn;
+        public bool ShowLocationUnknown
+        {
+            get => _showLocationUnkonwn;
+            set => RaiseAndSetIfChanged(value, ref _showLocationUnkonwn, nameof(ShowLocationUnknown));
+        }
+
         private WeatherService _weatherService;
         private WeatherLocationService _weatherLocationService;
+        private AppPreferencesService _appPreferencesService;
 
-        public Command OnLocationSelected;
-        public Action OnNavigateToLocationPage;
-
-        public HomeViewModel(WeatherService weatherService, WeatherLocationService weatherLocationService)
+        public HomeViewModel(WeatherService weatherService, WeatherLocationService weatherLocationService, AppPreferencesService appPreferencesService)
         {
             _weatherService = weatherService;
             _weatherLocationService = weatherLocationService;
-
-            LocationName = "Grand Rapids";
-
-            OnLocationSelected = new Command(() => {
-                OnNavigateToLocationPage?.Invoke();
-                });
+            _appPreferencesService = appPreferencesService;
         }
 
         public async Task FetchForecast()
         {
             SimplyWeatherLocation currentLocation = _weatherLocationService.GetCurrentLocation();
 
-            if(currentLocation != null)
+            if(currentLocation?.State == LocationState.LocationReady)
             {
+                ShowLocationUnknown = false;
                 Models.Forecast forecast = await _weatherService.GetTodaysWeather(currentLocation);
 
                 UpdateCurrentConditions(forecast);
                 UpdateHourlyConditions(forecast.HourlyConditionsForDay);
+
+                LocationName = _appPreferencesService.GetLocationName();
             }
             else
             {
@@ -135,7 +139,7 @@ namespace SimplyWeather2.Home
 
         private void LocationUnknown()
         {
-            //TODO
+            ShowLocationUnknown = true;
         }
     }
 }

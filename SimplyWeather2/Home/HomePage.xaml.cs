@@ -14,20 +14,15 @@ namespace SimplyWeather2.Home
         {
             InitializeComponent();
 
-            WeatherService weatherService = ((App)Application.Current).GetService<WeatherService>();
-            WeatherLocationService weatherLocationService = ((App)Application.Current).GetService<WeatherLocationService>();
+            App myApp = ((App)Application.Current);
+            WeatherService weatherService = myApp.GetService<WeatherService>();
+            WeatherLocationService weatherLocationService = myApp.GetService<WeatherLocationService>();
+            AppPreferencesService appPreferencesService = myApp.GetService<AppPreferencesService>();
 
-            _viewModel = new HomeViewModel(weatherService, weatherLocationService);
-
-            _viewModel.OnNavigateToLocationPage = navigateToLocationPage;
+            _viewModel = new HomeViewModel(weatherService, weatherLocationService, appPreferencesService);
 
             BindingContext = _viewModel;
 
-        }
-
-        private async void navigateToLocationPage()
-        {
-            await Shell.Current.GoToAsync("UpdateLocation", true);
         }
 
         protected override async void OnAppearing()
@@ -35,7 +30,14 @@ namespace SimplyWeather2.Home
             base.OnAppearing();
 
             await _viewModel.FetchForecast();
+            UpdateLocation.Clicked += OnNavigateToUpdateLocation;
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            UpdateLocation.Clicked -= OnNavigateToUpdateLocation;
+        }
     }
 }
