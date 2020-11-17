@@ -10,6 +10,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -38,6 +39,10 @@
             <ffimageloading:CachedImage Source="{Binding MapUrl_LR}" Grid.Row="2" Grid.Column="2" />
             <ffimageloading:CachedImage Source="{Binding RadarUrl_LR}" Grid.Row="2" Grid.Column="2" />
 
+            <StackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" >
+                <Stepper Maximum="20" Minimum="1" Increment="1" Margin="10,0" HorizontalOptions="Center" VerticalOptions="Center" Value="{Binding CurrentZoomLevel, Mode=TwoWay}"/>
+                <Label Text="{Binding ZoomText}" FontSize="18" HorizontalOptions="Center"/>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

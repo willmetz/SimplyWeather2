@@ -127,13 +127,43 @@ namespace SimplyWeather2.Radar
             set => RaiseAndSetIfChanged(value, ref _radarUrl_LR, nameof(RadarUrl_LR));
         }
 
+        private int _currentZoomLevel;
+        public int CurrentZoomLevel
+        {
+            get => _currentZoomLevel;
+            set
+            {
+                bool changed = RaiseAndSetIfChanged(value, ref _currentZoomLevel, nameof(CurrentZoomLevel));
+                if ( changed && _initialized)
+                {
+                    _appPreferencesService?.SetZoomLevel(value);
+                    UpdateRadar();
+                    UpdateZoomText(value);
+                }
+            }
+        }
+
+        private string _zoomText;
+        public string ZoomText
+        {
+            get => _zoomText;
+            set => RaiseAndSetIfChanged(value, ref _zoomText, nameof(ZoomText));
+        } 
+
         private readonly RadarService _radarService;
         private readonly WeatherLocationService _weatherLocationService;
+        private readonly AppPreferencesService _appPreferencesService;
+        private bool _initialized;
 
-        public RadarViewModel(RadarService radarService, WeatherLocationService weatherLocationService)
+        public RadarViewModel(RadarService radarService, WeatherLocationService weatherLocationService, AppPreferencesService appPreferencesService)
         {
+            _initialized = false;
             _radarService = radarService;
             _weatherLocationService = weatherLocationService;
+            _appPreferencesService = appPreferencesService;
+
+            CurrentZoomLevel = _appPreferencesService.GetZoomLevel();
+            UpdateZoomText(CurrentZoomLevel);
         }
 
         public void UpdateRadar()
@@ -142,13 +172,17 @@ namespace SimplyWeather2.Radar
 
             if(location != null)
             {
-                List<RadarTile> radarTiles = _radarService.GetRadarTiles(location, 5);
+                List<RadarTile> radarTiles = _radarService.GetRadarTiles(location, CurrentZoomLevel);
 
                 UpdateMapImages(radarTiles);
+
+                _initialized = true;
             }
+        }
 
-
-
+        private void UpdateZoomText(int zoomLevel)
+        {
+            ZoomText = $"Zoom Level = {zoomLevel}";
         }
 
         private void UpdateMapImages(List<RadarTile> radarTiles)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace SimplyWeather2.ViewModels
@@ -7,15 +8,19 @@ namespace SimplyWeather2.ViewModels
     {
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaiseAndSetIfChanged<T>(T newValue, ref T property, [CallerMemberName] string propertyName = "")
+        protected bool RaiseAndSetIfChanged<T>(T newValue, ref T property, [CallerMemberName] string propertyName = "")
         {
+
+            bool didPropertyChange = !EqualityComparer<T>.Default.Equals(property, newValue);
             property = newValue;
 
             var changed = PropertyChanged;
             if (changed == null)
-                return;
+                return didPropertyChange;
 
             changed(this, new PropertyChangedEventArgs(propertyName));
+
+            return didPropertyChange;
         }
         #endregion
     }

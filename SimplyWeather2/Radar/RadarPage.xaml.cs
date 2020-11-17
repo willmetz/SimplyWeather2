@@ -17,8 +17,9 @@ namespace SimplyWeather2.Radar
             App app = ((App)Application.Current);
             RadarService radarService = app.GetService<RadarService>();
             WeatherLocationService weatherLocationService = app.GetService<WeatherLocationService>();
+            AppPreferencesService appPreferencesService = app.GetService<AppPreferencesService>();
 
-            _viewModel = new RadarViewModel(radarService, weatherLocationService);
+            _viewModel = new RadarViewModel(radarService, weatherLocationService, appPreferencesService);
 
             BindingContext = _viewModel;
         }
