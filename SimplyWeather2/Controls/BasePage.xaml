@@ -10,7 +10,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" BackgroundColor="Blue">
+            <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}">
                 <Button x:Name="LocationMenuItem" ImageSource="location_icon" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent"/>
             </Grid>
 
