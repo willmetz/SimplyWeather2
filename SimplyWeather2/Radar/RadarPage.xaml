@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Radar.RadarPage"
              xmlns:vm="clr-namespace:SimplyWeather2.Radar"
+             xmlns:controls="clr-namespace:SimplyWeather2.Controls"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <Grid x:Name="MapGrid" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
@@ -28,7 +29,7 @@
             <ffimageloading:CachedImage Source="{Binding MapUrl_L}" Grid.Row="1" Grid.Column="0" />
             <ffimageloading:CachedImage Source="{Binding RadarUrl_L}" Grid.Row="1" Grid.Column="0" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_M}" Grid.Row="1" Grid.Column="1" />
-            <ffimageloading:CachedImage Source="{Binding RadarUrl_M}" Grid.Row="1" Grid.Column="1" />
+            <ffimageloading:CachedImage Source="{Binding RadarUrl_M}" Grid.Row="1" Grid.Column="1"/>
             <ffimageloading:CachedImage Source="{Binding MapUrl_R}" Grid.Row="1" Grid.Column="2" />
             <ffimageloading:CachedImage Source="{Binding RadarUrl_R}" Grid.Row="1" Grid.Column="2" />
 
@@ -38,6 +39,8 @@
             <ffimageloading:CachedImage Source="{Binding RadarUrl_LM}" Grid.Row="2" Grid.Column="1" />
             <ffimageloading:CachedImage Source="{Binding MapUrl_LR}" Grid.Row="2" Grid.Column="2" />
             <ffimageloading:CachedImage Source="{Binding RadarUrl_LR}" Grid.Row="2" Grid.Column="2" />
+
+            <controls:MarkerView Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalOffset="{Binding HorizontalCenterLocation}" VerticalOffset="{Binding VerticalCenterLocation}"/>
 
             <StackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" >
                 <Stepper Maximum="20" Minimum="1" Increment="1" Margin="10,0" HorizontalOptions="Center" VerticalOptions="Center" Value="{Binding CurrentZoomLevel, Mode=TwoWay}"/>

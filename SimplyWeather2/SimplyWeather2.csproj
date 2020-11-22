@@ -12,6 +12,8 @@
     <PackageReference Include="SimpleInjector" Version="5.0.4" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Home\" />

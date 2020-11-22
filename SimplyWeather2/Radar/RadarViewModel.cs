@@ -143,12 +143,28 @@ namespace SimplyWeather2.Radar
             }
         }
 
+        private float _horizontalCenterLocation;
+        public float HorizontalCenterLocation
+        {
+            get => _horizontalCenterLocation;
+            set => RaiseAndSetIfChanged(value, ref _horizontalCenterLocation, nameof(HorizontalCenterLocation));
+        }
+
+        private float _verticalCenterLocation;
+        public float VerticalCenterLocation
+        {
+            get => _verticalCenterLocation;
+            set => RaiseAndSetIfChanged(value, ref _verticalCenterLocation, nameof(VerticalCenterLocation));
+        } 
+
         private string _zoomText;
         public string ZoomText
         {
             get => _zoomText;
             set => RaiseAndSetIfChanged(value, ref _zoomText, nameof(ZoomText));
-        } 
+        }
+
+        private readonly int CENTER_TILE_INDEX = 4;
 
         private readonly RadarService _radarService;
         private readonly WeatherLocationService _weatherLocationService;
@@ -211,6 +227,15 @@ namespace SimplyWeather2.Radar
             RadarUrl_LL = radarTiles[6].RadarUrl;
             RadarUrl_LM = radarTiles[7].RadarUrl;
             RadarUrl_LR = radarTiles[8].RadarUrl;
+
+            HorizontalCenterLocation = 1/3f + GetDecimal(radarTiles[CENTER_TILE_INDEX].coordinate.X) * (1/3f);
+            VerticalCenterLocation = 1/3f + GetDecimal(radarTiles[CENTER_TILE_INDEX].coordinate.Y) * (1/3f);
+        }
+
+
+        private float GetDecimal(double number)
+        {
+            return (float)Math.Abs(number) - Math.Abs((int)number);
         }
     }
 }
