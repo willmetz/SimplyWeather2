@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using SimplyWeather2.Controls;
 using SimplyWeather2.Services;
 using Xamarin.Forms;
 
 namespace SimplyWeather2.Radar
 {
-    public partial class RadarPage : ContentPage
+    public partial class RadarPage : BasePage
     {
         private RadarViewModel _viewModel;
         private double _screenWidth = -1;

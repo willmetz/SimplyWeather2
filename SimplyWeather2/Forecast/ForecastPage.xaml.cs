@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using SimplyWeather2.Controls;
 using SimplyWeather2.Services;
 using Xamarin.Forms;
 
 namespace SimplyWeather2.Forecast
 {
-    public partial class ForecastPage : ContentPage
+    public partial class ForecastPage : BasePage
     {
         ForecastViewModel _viewModel;
 

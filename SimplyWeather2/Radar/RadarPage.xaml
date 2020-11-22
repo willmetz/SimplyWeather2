@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Radar.RadarPage"
              xmlns:vm="clr-namespace:SimplyWeather2.Radar"
              xmlns:controls="clr-namespace:SimplyWeather2.Controls"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
-    <ContentPage.Content>
+    <controls:BasePage.BasePageContent>
         <Grid x:Name="MapGrid" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -47,5 +47,5 @@
                 <Label Text="{Binding ZoomText}" FontSize="18" HorizontalOptions="Center"/>
             </StackLayout>
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    </controls:BasePage.BasePageContent>
+</controls:BasePage>

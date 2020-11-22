@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Forecast.ForecastPage"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              BackgroundColor="Aqua"
-             >
-    <ContentPage.Content>
+             xmlns:controls="clr-namespace:SimplyWeather2.Controls">
+    <controls:BasePage.BasePageContent>
             <CollectionView ItemsSource="{Binding DailyForecasts}" >
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
@@ -44,5 +44,5 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-    </ContentPage.Content>
-</ContentPage>
+    </controls:BasePage.BasePageContent>
+</controls:BasePage>
