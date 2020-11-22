@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
@@ -80,7 +78,7 @@ namespace SimplyWeather2.Controls
             canvas.Clear();
 
             SKPoint center = new SKPoint(e.Info.Width * HorizontalOffset, e.Info.Height * VerticalOffset);
-            float radius = 50;
+            float radius = 60;
             float sweepAngle = 40;
             
             SKRect circleContainer = new SKRect(center.X - radius, center.Y - radius, center.X + radius, center.Y + radius);
@@ -88,7 +86,7 @@ namespace SimplyWeather2.Controls
             SKPath markerPath = new SKPath();
 
             markerPath.MoveTo(center);
-            markerPath.ArcTo(circleContainer, 255, sweepAngle, false);
+            markerPath.ArcTo(circleContainer, 270 - sweepAngle/2f, sweepAngle, false);
             markerPath.Close();
             canvas.DrawPath(markerPath, _markerPaint);
 
