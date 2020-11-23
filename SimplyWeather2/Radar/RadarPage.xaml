@@ -2,9 +2,17 @@
 <controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Radar.RadarPage"
-             xmlns:vm="clr-namespace:SimplyWeather2.Radar"
              xmlns:controls="clr-namespace:SimplyWeather2.Controls"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+             xmlns:converters="clr-namespace:SimplyWeather2.Converters"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"             
+             HasLocationMenuItem="True"
+             PageTitle="Radar"
+             BackgroundColor="{StaticResource Secondary}">
+    <controls:BasePage.Resources>
+        <ResourceDictionary>
+            <converters:BoolInverter x:Key="boolInverter" />
+        </ResourceDictionary>
+    </controls:BasePage.Resources>
     <controls:BasePage.BasePageContent>
         <Grid x:Name="MapGrid" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -40,12 +48,18 @@
             <ffimageloading:CachedImage Source="{Binding MapUrl_LR}" Grid.Row="2" Grid.Column="2" />
             <ffimageloading:CachedImage Source="{Binding RadarUrl_LR}" Grid.Row="2" Grid.Column="2" />
 
-            <controls:MarkerView Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalOffset="{Binding HorizontalCenterLocation}" VerticalOffset="{Binding VerticalCenterLocation}"/>
+            <controls:MarkerView Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                                 HorizontalOffset="{Binding HorizontalCenterLocation}" VerticalOffset="{Binding VerticalCenterLocation}"
+                                 IsVisible="{Binding ShowLocationUnknown,Converter={StaticResource boolInverter}}"/>
 
-            <StackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" >
+            <StackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical"
+                         IsVisible="{Binding ShowLocationUnknown,Converter={StaticResource boolInverter}}">
                 <Stepper Maximum="20" Minimum="1" Increment="1" Margin="10,0" HorizontalOptions="Center" VerticalOptions="Center" Value="{Binding CurrentZoomLevel, Mode=TwoWay}"/>
                 <Label Text="{Binding ZoomText}" FontSize="18" HorizontalOptions="Center"/>
             </StackLayout>
+
+            <controls:UpdateLocationView IsVisible="{Binding ShowLocationUnknown}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4"
+                                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
         </Grid>
     </controls:BasePage.BasePageContent>
 </controls:BasePage>

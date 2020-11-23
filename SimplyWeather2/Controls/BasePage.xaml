@@ -11,6 +11,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}">
+                <Label x:Name="Title" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" TextColor="White" FontSize="18"/>
                 <Button x:Name="LocationMenuItem" ImageSource="location_icon" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent"/>
             </Grid>
 

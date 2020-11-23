@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Secondary">#1D87DA</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White">
                 </Setter>

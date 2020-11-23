@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimplyWeather2.Controls.UpdateLocationView"
+             Spacing="15"
+             BackgroundColor="{StaticResource Secondary}">   
+    <Label Text="Location Unknown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+    <Label Text="Please update current location to get the latest forecast" FontSize="15" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+    <Button Text="Update Location" HorizontalOptions="Center" Clicked="OnUpdateLocation"/>
+</StackLayout>

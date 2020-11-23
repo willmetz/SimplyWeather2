@@ -9,7 +9,15 @@ namespace SimplyWeather2.Controls
     {
         public IList<View> BasePageContent => BaseContentGrid.Children;
         public static readonly BindableProperty HasLocationMenuItemProperty = BindableProperty.Create("HasLocationMenuItem", typeof(bool), typeof(BasePage), true);
+        public static readonly BindableProperty PageTitleProperty = BindableProperty.Create("PageTitle", typeof(string), typeof(BasePage), string.Empty, propertyChanged:OnTitleChanged);
 
+        private static void OnTitleChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if(bindable is BasePage basePage)
+            {
+                basePage.Title.Text = (string)newValue;
+            }
+        }
 
         public bool HasLocationMenuItem
         {
@@ -26,6 +34,13 @@ namespace SimplyWeather2.Controls
                 }
                 
             }
+        }
+
+        private string _pageTitle;
+        public string PageTitle
+        {
+            get => _pageTitle;
+            set => _pageTitle = value;
         }
 
         public BasePage()

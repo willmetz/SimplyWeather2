@@ -30,14 +30,6 @@ namespace SimplyWeather2.Home
             base.OnAppearing();
 
             await _viewModel.FetchForecast();
-            UpdateLocation.Clicked += OnNavigateToUpdateLocation;
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            UpdateLocation.Clicked -= OnNavigateToUpdateLocation;
         }
     }
 }

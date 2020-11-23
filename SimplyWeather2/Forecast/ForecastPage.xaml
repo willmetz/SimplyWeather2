@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimplyWeather2.Forecast.ForecastPage"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             BackgroundColor="Aqua"
-             xmlns:controls="clr-namespace:SimplyWeather2.Controls">
+             xmlns:controls="clr-namespace:SimplyWeather2.Controls"
+             HasLocationMenuItem="True"
+             PageTitle="Forecast"
+             BackgroundColor="{StaticResource Secondary}">
     <controls:BasePage.BasePageContent>
+        <Grid>
+
             <CollectionView ItemsSource="{Binding DailyForecasts}" >
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
@@ -44,5 +48,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <controls:UpdateLocationView IsVisible="{Binding ShowLocationUnknown}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+        </Grid>
     </controls:BasePage.BasePageContent>
 </controls:BasePage>

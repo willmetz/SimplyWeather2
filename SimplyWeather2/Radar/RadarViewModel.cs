@@ -164,6 +164,13 @@ namespace SimplyWeather2.Radar
             set => RaiseAndSetIfChanged(value, ref _zoomText, nameof(ZoomText));
         }
 
+        private bool _showLocationUnkonwn;
+        public bool ShowLocationUnknown
+        {
+            get => _showLocationUnkonwn;
+            set => RaiseAndSetIfChanged(value, ref _showLocationUnkonwn, nameof(ShowLocationUnknown));
+        }
+
         private readonly int CENTER_TILE_INDEX = 4;
 
         private readonly RadarService _radarService;
@@ -186,13 +193,19 @@ namespace SimplyWeather2.Radar
         {
             SimplyWeatherLocation location = _weatherLocationService.GetCurrentLocation();
 
-            if(location != null)
+            if(location.State == LocationState.LocationReady)
             {
                 List<RadarTile> radarTiles = _radarService.GetRadarTiles(location, CurrentZoomLevel);
 
                 UpdateMapImages(radarTiles);
 
                 _initialized = true;
+
+                ShowLocationUnknown = false;
+            }
+            else
+            {
+                ShowLocationUnknown = true;
             }
         }
 

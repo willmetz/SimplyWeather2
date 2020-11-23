@@ -6,8 +6,9 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:SimplyWeather2.Controls"
              xmlns:converters="clr-namespace:SimplyWeather2.Converters"
-                   HasLocationMenuItem="True"
-             BackgroundColor="Aqua">
+             HasLocationMenuItem="True"
+             PageTitle="Home"
+             BackgroundColor="{StaticResource Secondary}">
     <controls:BasePage.Resources>
         <ResourceDictionary>
             <converters:BoolInverter x:Key="boolInverter" />
@@ -67,13 +68,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-
-            <StackLayout Spacing="15" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ShowLocationUnknown}" Grid.RowSpan="2">
-
-                <Label Text="Location Unknown" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-                <Label Text="Please update current location to get the latest forecast" FontSize="15" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                <Button x:Name="UpdateLocation" Text="Update Location" HorizontalOptions="Center" />
-            </StackLayout>
+            <controls:UpdateLocationView IsVisible="{Binding ShowLocationUnknown}" Grid.RowSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
 
         </Grid>
         

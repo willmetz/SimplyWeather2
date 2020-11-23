@@ -22,6 +22,13 @@ namespace SimplyWeather2.Forecast
             set => RaiseAndSetIfChanged(value, ref _dailyForecasts, nameof(DailyForecasts));
         }
 
+        private bool _showLocationUnkonwn;
+        public bool ShowLocationUnknown
+        {
+            get => _showLocationUnkonwn;
+            set => RaiseAndSetIfChanged(value, ref _showLocationUnkonwn, nameof(ShowLocationUnknown));
+        }
+
         public ForecastViewModel(WeatherService weatherService, WeatherLocationService weatherLocationService)
         {
             _weatherService = weatherService;
@@ -31,12 +38,22 @@ namespace SimplyWeather2.Forecast
 
         public async Task UpdateExtendedForecast()
         {
-            DailyForecasts = new ObservableCollection<DailyForecastItem>();
+            SimplyWeatherLocation currentLocation = _weatherLocationService.GetCurrentLocation();
 
-            SimplyWeatherLocation location = _weatherLocationService.GetCurrentLocation();
-            List<DayForecast> forecast = await _weatherService.GetExtendedForecast(location);
+            if (currentLocation.State == LocationState.LocationReady)
+            {
+                DailyForecasts = new ObservableCollection<DailyForecastItem>();
 
-            forecast.ForEach(day => DailyForecasts.Add(new DailyForecastItem(day)));
+                SimplyWeatherLocation location = _weatherLocationService.GetCurrentLocation();
+                List<DayForecast> forecast = await _weatherService.GetExtendedForecast(location);
+
+                forecast.ForEach(day => DailyForecasts.Add(new DailyForecastItem(day)));
+                ShowLocationUnknown = false;
+            }
+            else
+            {
+                ShowLocationUnknown = true;
+            }
 
         }
     }
